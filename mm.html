@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Step Progress Form</title>
+  <link rel="stylesheet" href="/path/to/your/styles.css">
+  <style>
+    .step {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .step-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .step-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #e0e7ff;
+      color: #4f46e5;
+      font-weight: bold;
+    }
+    .step-icon-active {
+      background-color: #3b82f6;
+      color: white;
+    }
+    .step-inline-title {
+      margin-top: 10px;
+      color: black;
+      font-weight: 600;
+    }
+    .step-content-wrapper {
+      display: flex;
+      align-items: center;
+    }
+    .step-content-wrapper::after {
+      content: '';
+      width: 100px;
+      height: 1px;
+      background-color: #e5e7eb;
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+    .step-item:last-child .step-content-wrapper::after {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <ul id="advancedFormStepFormProgress" class="step step-md step-inline mb-5">
+      <li class="step-item">
+        <div class="step-content-wrapper">
+          <span class="step-icon step-icon-active">1</span>
+          <div class="step-content">
+            <span class="step-inline-title">Account</span>
+          </div>
+        </div>
+      </li>
+      <li class="step-item">
+        <div class="step-content-wrapper">
+          <span class="step-icon">2</span>
+          <div class="step-content">
+            <span class="step-inline-title">Profile</span>
+          </div>
+        </div>
+      </li>
+      <li class="step-item">
+        <div class="step-content-wrapper">
+          <span class="step-icon">3</span>
+          <div class="step-content">
+            <span class="step-inline-title">Address</span>
+          </div>
+        </div>
+      </li>
+      <li class="step-item">
+        <div class="step-content-wrapper">
+          <span class="step-icon">4</span>
+          <div class="step-content">
+            <span class="step-inline-title">Confirmation</span>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</body>
+</html>

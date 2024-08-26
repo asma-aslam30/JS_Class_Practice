@@ -1,0 +1,27 @@
+/* Custom styles for nested sidebar */
+.sidebar-style-2 .nav-primary .nav-collapse {
+    padding-left: 20px; /* Adjust the padding as needed */
+  }
+  
+  .sidebar-style-2 .nav-primary .nav-collapse .subnav {
+    padding-left: 10px; /* Adjust the padding as needed */
+  }
+  
+  .sidebar-style-2 .nav-primary .nav-item {
+    position: relative;
+  }
+  
+  .sidebar-style-2 .nav-primary .nav-item a.collapsed .caret {
+    transform: rotate(0deg);
+  }
+  
+  .sidebar-style-2 .nav-primary .nav-item a .caret {
+    position: absolute;
+    right: 15px;
+    transition: transform 0.3s ease;
+  }
+  
+  .sidebar-style-2 .nav-primary .nav-item a.active .caret {
+    transform: rotate(90deg);
+  }
+  

@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+  <title>Al Rahim Textile - Dashboard</title>
+  <!-- General CSS Files -->
+  <link rel="stylesheet" href="css/app.min.css">
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="bundles/datatables/datatables.min.css">
+  <link rel="stylesheet" href="bundles/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <!-- Custom style CSS -->
+  <link rel="stylesheet" href="css/custom.css">
+  <link rel='shortcut icon' type='image/x-icon' href='img/favicon.ico' />
+</head>
+<style>
+  .form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin-top: -30px !important;
+  }
+
+  .form-box {
+    width: 100%;
+    max-width: 600px;
+  }
+  .border{
+    margin-top: -300px !important;
+  }
+</style>
+
+<body>
+  <div class="loader"></div>
+  <div id="app">
+    <div class="main-wrapper main-wrapper-1">
+      <div class="navbar-bg"></div>
+      <nav class="navbar navbar-expand-lg main-navbar sticky">
+        <div class="form-inline mr-auto">
+          <ul class="navbar-nav mr-3">
+            <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg
+									collapse-btn"> <i data-feather="align-justify"></i></a></li>
+            <li><a href="#" class="nav-link nav-link-lg fullscreen-btn">
+                <i data-feather="maximize"></i>
+              </a></li>
+            <li>
+              
+            </li>
+          </ul>
+        </div>
+        <ul class="navbar-nav navbar-right">
+          
+
+          <!--Notifications-->
+          
+
+          <li class="dropdown"><a href="#" data-toggle="dropdown"
+            class="nav-link dropdown-toggle nav-link-lg nav-link-user"> <img alt="image" src="img/user.jpg"
+              class="user-img-radious-style"> <span class="d-sm-none d-lg-inline-block"></span></a>
+          <div class="dropdown-menu dropdown-menu-right pullDown">
+            <div class="dropdown-title">Welcome <%= userData.Designation %></div>
+            <a  class="dropdown-item has-icon">Name : <%= userData.Name %>
+            </a> <a  class="dropdown-item has-icon"> 
+              Email:  <%= userData.Email %>
+            </a> <a  class="dropdown-item has-icon"> 
+              Contact:  <%= userData.Contact %>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a href="/logout" class="dropdown-item has-icon text-danger"> <i class="fas fa-sign-out-alt"></i>
+              Logout
+            </a>
+          </div>
+        </li>
+        </ul>
+      </nav>
+
+      <!-- Sidebar -->
+      <div class="main-sidebar sidebar-style-2">
+
+        <aside id="sidebar-wrapper">
+
+          <div class="sidebar-brand">
+
+            <a href="/">
+              <img alt="image" src="/img/al_rahim.jpg" class="header-logo" style="width: 100px; height: auto;" />
+            </a>
+
+
+          </div>
+
+          <ul class="sidebar-menu">
+
+            <li class="menu-header">Main</li>
+
+            <% if(userData.Designation == "QA Team" || userData.Designation == "QMS Team" || userData.Designation == "Marketing Team" || userData.Designation == "Admin") { %>
+            <li class="dropdown">
+              <a href="/ccm-form" class="nav-link"><i data-feather="monitor"></i><span>CCM Form</span></a>
+            </li>
+            <% } %>
+
+            <li class="dropdown">
+              <a href="/entries-norm-user" class="nav-link"><i data-feather="monitor"></i><span>Your Entries</span></a>
+            </li>
+
+            <% if(userData.Designation == "QA Team" || userData.Designation == "Admin") { %>
+            <li class="dropdown">
+              <a href="/entries-qa" class="nav-link"><i data-feather="monitor"></i><span>Review Entries for QA</span></a>
+            </li>
+            <% } %>
+
+            <% if(userData.Designation == "QMS Team" || userData.Designation == "Admin") { %>
+            <li class="dropdown">
+              <a href="/entries-qms" class="nav-link"><i data-feather="monitor"></i><span>Review Entries for QMS</span></a>
+            </li>
+            <% } %>
+
+            <% if(userData.Designation == "Admin") { %>
+
+            <li class="dropdown">
+              <a href="/" class="menu-toggle nav-link has-dropdown"><i data-feather="pie-chart"></i><span>Admin Actions</span></a>
+              <ul class="dropdown-menu">
+                <li><a class="nav-link" href="/users-list">Users List</a></li>
+                <li><a class="nav-link" href="/products-list">Products List</a></li>
+              </ul>
+
+            </li>
+            <% } %>
+
+            <li class="dropdown">
+              <a href="mailto:arkham.workmail@gmail.com"><i data-feather="mail"></i><span>Report Bug</span></a>
+            </li>
+          </ul>
+        </aside>
+      </div>
+      <!-- Main Content -->
+      <div class="form-container">
+        <div class="form-box">
+          <form class="js-step-form js-validate" data-hs-step-form-options='{
+                  "progressSelector": "#advancedFormStepFormProgress",
+                  "stepsSelector": "#advancedFormStepFormContent",
+                  "isValidate": true
+                }'>
+            <!-- Step -->
+             
+              <style>
+                .step {
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  margin-bottom: 20px;
+                }
+
+                .step-item {
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                }
+
+                .step-icon {
+                  width: 40px;
+                  height: 40px;
+                  border-radius: 50%;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  background-color: #e0e7ff;
+                  color: #4f46e5;
+                  font-weight: bold;
+                }
+
+                .step-icon-active {
+                  background-color: #3b82f6;
+                  color: white;
+                }
+
+                .step-inline-title {
+                  margin-top: 10px;
+                  color: black;
+                  font-weight: 600;
+                }
+
+                .step-content-wrapper {
+                  display: flex;
+                  align-items: center;
+                }
+
+                .step-content-wrapper::after {
+                  content: '';
+                  width: 100px;
+                  height: 1px;
+                  background-color: #e5e7eb;
+                  margin-left: 20px;
+                  margin-right: 20px;
+                }
+
+                .step-item:last-child .step-content-wrapper::after {
+                  display: none;
+                }
+              </style>
+            </head>
+
+            <body>
+              <div class="form-container">
+                <ul id="advancedFormStepFormProgress" class="step step-md step-inline mb-5">
+                  <li class="step-item">
+                    <div class="step-content-wrapper">
+                      <span class="step-icon step-icon-active">1</span>
+                      <div class="step-content">
+                        <span class="step-inline-title">Customer Details</span>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="step-item">
+                    <div class="step-content-wrapper">
+                      <span class="step-icon">2</span>
+                      <div class="step-content">
+                        <span class="step-inline-title">Product Details</span>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="step-item">
+                    <div class="step-content-wrapper">
+                      <span class="step-icon">3</span>
+                      <div class="step-content">
+                        <span class="step-inline-title">Complaint details</span>
+                      </div>
+                    </div>
+                  </li>
+                  <!-- <li class="step-item">
+                    <div class="step-content-wrapper">
+                      <span class="step-icon">4</span>
+                      <div class="step-content">
+                        <span class="step-inline-title">Confirmation</span>
+                      </div>
+                    </div>
+                  </li> -->
+                </ul>
+              </div>
+
+              <!-- End Step -->
+
+              <!-- Content Step Form -->
+              
+              <div id="advancedFormStepFormContent" class="border rounded p-4 ">
+                <div id="advancedFormSelectStepOne" class="active">
+                  <!-- Input Group -->
+                  <div class="mb-4">
+                    <label for="CustomerName">Customer Name</label>
+                      <input type="text" class="form-control" required="" id="CustomerName" name="CustomerName">
+                      <div class="invalid-feedback">
+                        Please enter the Customer's Name.
+                      </div>
+                  </div>
+                  <!-- End Input Group -->
+
+                  <!-- Input Group -->
+                  <div class="mb-4">
+                    <label for="NatureOfComplaint[]" >Select Nature(s) of Complaint</label>
+                      <select class="form-control select2" multiple name="NatureOfComplaint[]" id="NatureOfComplaint[]">
+                        <% CCMFieldsDataReq.forEach(function(item) { %>
+                        <% if (item.NOCDropdown) { %>
+                        <optgroup label="<%= item.NOCDropdown %>">
+                          <% if (item.NOCDropdownSubType) { %>
+                          <% item.NOCDropdownSubType.split(',').forEach(function(option) { %>
+                          <option value="<%= option.trim() %>"><%= option.trim() %></option>
+                          <% }); %>
+                          <% } %>
+                        </optgroup>
+                        <% } %>
+                        <% }); %>
+                      </select>
+                  </div>
+                  <!-- End Input Group -->
+
+                  <!-- Input Group -->
+                  <div class="mb-4">
+                    <label for="NatureOfComplaintOthers">Other Nature(s) of Complaints</label>
+                    <input type="text" placeholder="Add comma-separated values without space" class="form-control" name="NatureOfComplaintOthers" id="NatureOfComplaintOthers" multiple>
+                  </div>
+                  <!-- End Input Group -->
+
+                  
+                    <div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="PONumber">PO#</label>
+                            <input type="text" class="form-control" required="" name="PONumber" id="PONumber">
+                            <div class="invalid-feedback">
+                              Please enter the PO Number.
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="SOSNumber">SOS#</label>
+                            <input type="text" class="form-control" required="" name="SOSNumber" id="SOSNumber">
+                            <div class="invalid-feedback">
+                              Please enter the SOS Number.
+                            </div>
+                          </div>
+                        </div>
+                        </div>
+                    </div>
+                  
+                  <div class="d-flex justify-content-end">
+                    <button type="button" class="btn btn-sm btn-primary transition-3d-hover mr-1" data-hs-step-form-next-options='{
+                            "targetSelector": "#advancedFormSelectStepTwo"
+                          }'>Next</button>
+                  </div>
+                </div>
+
+                <div id="advancedFormSelectStepTwo" style="display: none;">
+                  <!-- Input Group -->
+                  <div class="mb-4">
+                    <label class="input-label" for="advancedFormFirstName">First name</label>
+                    <div class="input-group input-group-sm">
+                      <input type="text" class="form-control" name="advancedFormFirstName" id="advancedFormFirstName" placeholder="First name" aria-label="First name" required data-msg="Please enter a first name.">
+                    </div>
+                  </div>
+                  <!-- End Input Group -->
+
+                  <!-- Input Group -->
+                  <div class="mb-4">
+                    <label class="input-label" for="advancedFormLastName">Last name</label>
+                    <div class="input-group input-group-sm">
+                      <input type="text" class="form-control" name="advancedFormLastName" id="advancedFormLastName" placeholder="Last name" aria-label="Last name" required data-msg="Please enter a last name.">
+                    </div>
+                  </div>
+                  <!-- End Input Group -->
+
+                  <!-- Input Group -->
+                  <div class="mb-4">
+                    <label class="input-label" for="advancedFormEmail">Email</label>
+                    <div class="input-group input-group-sm">
+                      <input type="email" class="form-control" name="advancedFormEmail" id="advancedFormEmail" placeholder="Email" aria-label="Email" required data-msg="Please enter an email address.">
+                    </div>
+                  </div>
+                  <!-- End Input Group -->
+
+                  <div class="d-flex justify-content-end">
+                    <a class="btn btn-sm btn-soft-secondary transition-3d-hover mr-1" href="javascript:;" data-hs-step-form-prev-options='{
+                       "targetSelector": "#advancedFormSelectStepOne"
+                     }'>Back</a>
+                    <button type="button" class="btn btn-sm btn-primary transition-3d-hover" data-hs-step-form-next-options='{
+                            "targetSelector": "#advancedFormSelectStepThree"
+                          }'>Next</button>
+                  </div>
+                </div>
+
+                <div id="advancedFormSelectStepThree" style="display: none;">
+                  <!-- Input Group -->
+                  <div class="mb-4">
+                    <label class="input-label" for="advancedFormAddress1">Address 1</label>
+                    <div class="input-group input-group-sm">
+                      <input type="text" class="form-control" name="advancedFormAddress1" id="advancedFormAddress1" placeholder="Address" aria-label="Address" required data-msg="Please enter a valid address.">
+                    </div>
+                  </div>
+                  <!-- End Input Group -->
+
+                  <!-- Input Group -->
+                  <div class="mb-4">
+                    <label class="input-label" for="advancedFormAddress2">Address 2 <small class="text-body">(optional)</small></label>
+                    <div class="input-group input-group-sm">
+                      <input type="text" class="form-control" name="advancedFormAddress2" id="advancedFormAddress2" placeholder="Address" aria-label="Address">
+                    </div>
+                  </div>
+                  <!-- End Input Group -->
+
+                  <div class="d-flex justify-content-end">
+                    <a class="btn btn-sm btn-soft-secondary transition-3d-hover mr-1" href="javascript:;" data-hs-step-form-prev-options='{
+                       "targetSelector": "#advancedFormSelectStepTwo"
+                     }'>Back</a>
+                    <button type="button" class="btn btn-sm btn-primary transition-3d-hover" data-hs-step-form-next-options='{
+                            "targetSelector": "#advancedFormSelectStepFour"
+                          }'>Next</button>
+                  </div>
+                </div>
+
+                <div id="advancedFormSelectStepFour" style="display: none;">
+                  You have successfully completed the form!
+
+                  <div class="d-flex justify-content-end">
+                    <a class="btn btn-sm btn-soft-secondary transition-3d-hover mr-1" href="javascript:;" data-hs-step-form-prev-options='{
+                       "targetSelector": "#advancedFormSelectStepThree"
+                     }'>Back</a>
+                    <button type="button" class="btn btn-sm btn-primary transition-3d-hover">Done</button>
+                  </div>
+                </div>
+              </div>
+              <!-- End Content Step Form -->
+          </form>
+        </div>
+      </div>
+
+      <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/hs-step-form/dist/hs-step-form.min.js"></script>
+      
+
+      <div class="main-content">
+        <div class="settingSidebar">
+          <a href="javascript:void(0)" class="settingPanelToggle"> <i class="fa fa-spin fa-cog"></i>
+          </a>
+          <div class="settingSidebar-body ps-container ps-theme-default">
+            <div class=" fade show active">
+              <div class="setting-panel-header">Setting Panel
+              </div>
+              <div class="p-15 border-bottom">
+                <h6 class="font-medium m-b-10">Select Layout</h6>
+                <div class="selectgroup layout-color w-50">
+                  <label class="selectgroup-item">
+                    <input type="radio" name="value" value="1" class="selectgroup-input-radio select-layout" checked>
+                    <span class="selectgroup-button">Light</span>
+                  </label>
+                  <label class="selectgroup-item">
+                    <input type="radio" name="value" value="2" class="selectgroup-input-radio select-layout">
+                    <span class="selectgroup-button">Dark</span>
+                  </label>
+                </div>
+              </div>
+              <div class="p-15 border-bottom">
+                <h6 class="font-medium m-b-10">Sidebar Color</h6>
+                <div class="selectgroup selectgroup-pills sidebar-color">
+                  <label class="selectgroup-item">
+                    <input type="radio" name="icon-input" value="1" class="selectgroup-input select-sidebar">
+                    <span class="selectgroup-button selectgroup-button-icon" data-toggle="tooltip" data-original-title="Light Sidebar"><i class="fas fa-sun"></i></span>
+                  </label>
+                  <label class="selectgroup-item">
+                    <input type="radio" name="icon-input" value="2" class="selectgroup-input select-sidebar" checked>
+                    <span class="selectgroup-button selectgroup-button-icon" data-toggle="tooltip" data-original-title="Dark Sidebar"><i class="fas fa-moon"></i></span>
+                  </label>
+                </div>
+              </div>
+              <div class="p-15 border-bottom">
+                <h6 class="font-medium m-b-10">Color Theme</h6>
+                <div class="theme-setting-options">
+                  <ul class="choose-theme list-unstyled mb-0">
+                    <li title="white" class="active">
+                      <div class="white"></div>
+                    </li>
+                    <li title="cyan">
+                      <div class="cyan"></div>
+                    </li>
+                    <li title="black">
+                      <div class="black"></div>
+                    </li>
+                    <li title="purple">
+                      <div class="purple"></div>
+                    </li>
+                    <li title="orange">
+                      <div class="orange"></div>
+                    </li>
+                    <li title="green">
+                      <div class="green"></div>
+                    </li>
+                    <li title="red">
+                      <div class="red"></div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="p-15 border-bottom">
+                <div class="theme-setting-options">
+                  <label class="m-b-0">
+                    <input type="checkbox" name="custom-switch-checkbox" class="custom-switch-input" id="mini_sidebar_setting">
+                    <span class="custom-switch-indicator"></span>
+                    <span class="control-label p-l-10">Mini Sidebar</span>
+                  </label>
+                </div>
+              </div>
+              <div class="p-15 border-bottom">
+                <div class="theme-setting-options">
+                  <label class="m-b-0">
+                    <input type="checkbox" name="custom-switch-checkbox" class="custom-switch-input" id="sticky_header_setting">
+                    <span class="custom-switch-indicator"></span>
+                    <span class="control-label p-l-10">Sticky Header</span>
+                  </label>
+                </div>
+              </div>
+              <div class="mt-4 mb-4 p-3 align-center rt-sidebar-last-ele">
+                <a href="#" class="btn btn-icon icon-left btn-primary btn-restore-theme">
+                  <i class="fas fa-undo"></i> Restore Default
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="main-footer">
+        <div class="footer-left">
+          <a href="Al Rahim Textile - Dashboard.net">Al Rahim Textile - Dashboard</a></a>
+        </div>
+        <div class="footer-right">
+        </div>
+      </footer>
+    </div>
+  </div>
+  <script>
+    $(document).on('ready', function () {
+      // initialization of step form
+      $('.js-step-form').each(function () {
+        var stepForm = new HSStepForm($(this)).init();
+      });
+    });
+  </script>
+  <!-- General JS Scripts -->
+  <script src="js/app.min.js"></script>
+  <!-- JS Libraies -->
+  <!-- Page Specific JS File -->
+  <script src="bundles/datatables/datatables.min.js"></script>
+  <script src="bundles/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js"></script>
+  <script src="bundles/datatables/export-tables/dataTables.buttons.min.js"></script>
+  <script src="bundles/datatables/export-tables/buttons.flash.min.js"></script>
+  <script src="bundles/datatables/export-tables/jszip.min.js"></script>
+  <script src="bundles/datatables/export-tables/pdfmake.min.js"></script>
+  <script src="bundles/datatables/export-tables/vfs_fonts.js"></script>
+  <script src="bundles/datatables/export-tables/buttons.print.min.js"></script>
+  <script src="js/page/datatables.js"></script>
+  <!-- Template JS File -->
+  <script src="js/scripts.js"></script>
+  <!-- Custom JS File -->
+  <script src="js/custom.js"></script>
+</body>
+
+</html>
