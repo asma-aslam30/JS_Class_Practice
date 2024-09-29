@@ -5,12 +5,12 @@ function Biscuitmold() {
 }
 console.log(new Biscuitmold());
 
-function Student(name, age, email) {
+function Student(name, age, email) {  // parameter
   this.name = name;
   this.age = age;
   this.email = email;
 }
-var student1 = new Student("asma", 20, "aslamasma486@gmail.com");
+var student1 = new Student("asma", 20, "aslamasma486@gmail.com");  // Argument
 var student2 = new Student("misbah", 40, "misbahasma486@gmail.com");
 var student3 = new Student("hira", 20, "aslamasma486@gmail.com");
 var student4 = new Student("rida", 20, "aslamasma486@gmail.com");
@@ -54,10 +54,10 @@ function Board(stName) {
 var board1 = new Board("asma");
 // console.log(board1.allDetails());
 console.log(board1);
-//  ====================Prototypes==============================
+//  ====================Prototypes(in-built functionality)==============================
 
 function Board(stName) {
-    this.stName = stName;  // Initializes the stName property
+    this.stName = stName;  // Initializes the stName property   
   }
   
   Board.prototype.allDetails = function () {
@@ -67,8 +67,9 @@ function Board(stName) {
   var board2 = new Board("asma");  // Creates a new instance of Board
   console.log(board2.allDetails());  // Calls allDetails method and logs the output
   
-
+  var board22 = new Board("asma");  // Creates a new instance of Board
+  console.log(board22); 
   
-
+// function by default return undefined;
 
 

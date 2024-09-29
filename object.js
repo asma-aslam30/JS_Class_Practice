@@ -28,7 +28,7 @@ console.log(animal.sound); // dot notation
 console.log(animal["food"]); //
 
 
-bracket notation
+// bracket notation
 console.log(animal["food"[1]]); // bracket notation
 console.log(animal["address"]["city"]); // bracket notation
 console.log(animal.address.street);

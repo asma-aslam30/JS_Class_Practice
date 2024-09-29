@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .products {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .product {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin: 10px;
+      width: 200px;
+      display: inline-block;
+    }
+
+    .product img {
+      width: 100%;
+      height: auto;
+    }
+
+    .product-title {
+      font-size: 18px;
+      margin: 10px 0;
+    }
+
+    .prize {
+      color: green;
+      font-size: 16px;
+    }
+
+    .description {
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .data-addtoCart {
+      display: inline-block;
+      background-color: #007bff;
+      color: #fff;
+      padding: 5px 10px;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container"></div>
+
+  <script>
+    function showData() {
+      return new Promise(function(resolve, reject) {
+        fetch("https://api.escuelajs.co/api/v1/products")
+          .then(function(res) {
+            return res.json();
+          })
+          .then(function(res) {
+            resolve(res);
+          })
+          .catch(function(error) {
+            reject(error);
+          });
+      });
+    }
+
+    function renderProducts(products) {
+      const container = document.querySelector(".container");
+      container.innerHTML = ''; // Clear the container before rendering
+
+      for (let i = 0; i < products.length; i++) {
+        const product = products[i];
+
+        const product_html = `
+          <div class="product">
+            <img src="${product.images[0]}" alt="${product.title}" class="product-image">
+            <h2 class="product-title">${product.title}</h2>
+            <p class="description">${product.description}</p>
+            <h3 class="prize">$${product.price}</h3>
+            <a href="#!" class="data-addtoCart">Add to Cart</a>
+          </div>`;
+        
+        container.innerHTML += product_html;
+      }
+    }
+
+    showData()
+      .then(function(res) {
+        console.log(res);
+        renderProducts(res);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  </script>
+
+</body>
+
+</html>
